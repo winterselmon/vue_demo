@@ -1,60 +1,231 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <v-container>
+    <v-row class="text-center">
+      <v-col cols="4"></v-col>
+      <v-col cols="4">
+        <v-img
+          src="http://127.0.0.1:8887/new_logo.jpg"
+          class="my"
+          contain
+          height="200"
+        />
+      </v-col>
+
+      <v-col cols="4">
+        <div class="b" style="margin-bottom:auto;margin-top:auto">
+          <v-row class="text-center">
+            <v-avatar>
+              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+            </v-avatar>
+            <p class="login">Log in</p>
+          </v-row>
+        </div>
+      </v-col>
+    </v-row>
+
+    <v-row style="margin-top:20px">
+      <v-col></v-col>
+      <v-col cols="2" md="1">
+        <div class="my-2">
+          <v-btn depressed large dark--black>HOME</v-btn>
+        </div>
+      </v-col>
+
+      <v-col cols="2" md="1">
+        <div class="my-2">
+          <v-btn depressed large dark--black>MENU</v-btn>
+        </div>
+      </v-col>
+
+      <v-col cols="2" md="1">
+        <div class="my-2">
+          <v-btn depressed large dark--black>ABOUT</v-btn>
+        </div>
+      </v-col>
+
+      <v-col cols="2" md="1">
+        <div class="my-2">
+          <v-btn depressed large dark--black>CONTACT</v-btn>
+        </div>
+      </v-col>
+
+      <v-col>
+        <div class="round">
+          <v-icon> </v-icon>
+          <v-col v-for="value in ['l']" :key="value" cols="12" md="12">
+            <div
+              :class="`rounded-${value}-xl`"
+              class="pa-7 text-center grey lighten-1"
+              v-text="`Shop`"
+            ></div>
+          </v-col>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+  data: () => ({
+    valid: false,
+    firstname: "",
+    lastname: "",
+    nameRules: [
+      (v) => !!v || "Name is required",
+      (v) => v.length <= 10 || "Name must be less than 10 characters",
+    ],
+    email: "",
+    emailRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+/.test(v) || "E-mail must be valid",
+    ],
+  }),
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<!-- <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-3">
+          What's next?
+        </h2>
+
+        <v-row justify="center">
+          <a
+            v-for="(next, i) in whatsNext"
+            :key="i"
+            :href="next.href"
+            class="subheading mx-3"
+            target="_blank"
+          >
+            {{ next.text }}
+          </a>
+        </v-row>
+      </v-col>
+
+      <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-3">
+          Important Links
+        </h2>
+
+        <v-row justify="center">
+          <a
+            v-for="(link, i) in importantLinks"
+            :key="i"
+            :href="link.href"
+            class="subheading mx-3"
+            target="_blank"
+          >
+            {{ link.text }}
+          </a>
+        </v-row>
+      </v-col>
+
+      <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-3">
+          Ecosystem
+        </h2>
+
+        <v-row justify="center">
+          <a
+            v-for="(eco, i) in ecosystem"
+            :key="i"
+            :href="eco.href"
+            class="subheading mx-3"
+            target="_blank"
+          >
+            {{ eco.text }}
+          </a>
+        </v-row>
+      </v-col> -->
+
+<script>
+export default {
+  name: "HelloWorld",
+
+  data: () => ({
+    ecosystem: [
+      {
+        text: "vuetify-loader",
+        href: "https://github.com/vuetifyjs/vuetify-loader",
+      },
+      {
+        text: "github",
+        href: "https://github.com/vuetifyjs/vuetify",
+      },
+      {
+        text: "awesome-vuetify",
+        href: "https://github.com/vuetifyjs/awesome-vuetify",
+      },
+    ],
+    importantLinks: [
+      {
+        text: "Documentation",
+        href: "https://vuetifyjs.com",
+      },
+      {
+        text: "Chat",
+        href: "https://community.vuetifyjs.com",
+      },
+      {
+        text: "Made with Vuetify",
+        href: "https://madewithvuejs.com/vuetify",
+      },
+      {
+        text: "Twitter",
+        href: "https://twitter.com/vuetifyjs",
+      },
+      {
+        text: "Articles",
+        href: "https://medium.com/vuetify",
+      },
+    ],
+    whatsNext: [
+      {
+        text: "Explore components",
+        href: "https://vuetifyjs.com/components/api-explorer",
+      },
+      {
+        text: "Select a layout",
+        href: "https://vuetifyjs.com/getting-started/pre-made-layouts",
+      },
+      {
+        text: "Frequently Asked Questions",
+        href:
+          "https://vuetifyjs.com/getting-started/frequently-asked-questions",
+      },
+    ],
+  }),
+};
+</script>
+<style>
+div.b {
+  position: absolute;
+  right: 0;
+  width: 10%;
+  margin-right: 20px;
+  margin-bottom: auto;
+  margin-top: auto;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+p.login {
+  text-align: center;
+  margin-left: 16px;
+  margin-bottom: auto;
+  margin-top: auto;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+div.round {
+  position: absolute;
+  right: 0;
+  width: 10%;
 }
 </style>
